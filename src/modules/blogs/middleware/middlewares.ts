@@ -72,7 +72,6 @@ export const inputCheckErrorsMiddleware = (
     });
     return;
   }
-
   next();
 };
 

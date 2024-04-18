@@ -12,13 +12,13 @@ export const getBlogPosts = async (
   req: RequestParamsQuery<BlogIdModel, TBlogQueryModel>,
   res: Response,
 ) => {
-  const blog = await blogMongoQueryRepository.find(
-    new ObjectId(req.params.blogId),
-  );
-
-  if (!blog) {
-    res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
-  }
+  // const blog = await blogMongoQueryRepository.find(
+  //   new ObjectId(req.params.blogId),
+  // );
+  //
+  // if (!blog) {
+  //   res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
+  // }
 
   const sanitizedQuery = helper(req.query);
   const posts = await postMongoQueryRepository.getMany(

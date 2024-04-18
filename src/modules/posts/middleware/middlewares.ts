@@ -95,9 +95,9 @@ export const inputCheckErrorsMiddleware = (
     });
     return;
   }
-
   next();
 };
+
 export const ADMIN_AUTH = "admin:qwerty";
 // export const ADMIN_AUTH = "trickster:Passw1rd"; // get from SETTINGS
 export const authMiddleware = (
