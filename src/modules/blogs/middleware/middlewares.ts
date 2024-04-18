@@ -76,8 +76,8 @@ export const inputCheckErrorsMiddleware = (
   next();
 };
 
-// export const ADMIN_AUTH = "admin:qwerty";
-export const ADMIN_AUTH = "trickster:Passw1rd"; // get from SETTINGS
+export const ADMIN_AUTH = "admin:qwerty";
+// export const ADMIN_AUTH = "trickster:Passw1rd"; // get from SETTINGS
 export const authMiddleware = (
   req: Request,
   res: Response,
