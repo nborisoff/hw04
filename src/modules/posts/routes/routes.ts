@@ -2,7 +2,9 @@ import { Router } from "express";
 import { getPosts } from "../controllers/getPostsController";
 import {
   authMiddleware,
+  existingBlogIdBodyValidator,
   inputCheckErrorsMiddleware,
+  postBlogIdInputValidator,
   postInputValidators,
 } from "../middleware/middlewares";
 import { createPost } from "../controllers/createPostController";
@@ -17,6 +19,8 @@ postRouter.post(
   "/",
   authMiddleware,
   ...postInputValidators,
+  postBlogIdInputValidator,
+  existingBlogIdBodyValidator,
   inputCheckErrorsMiddleware,
   createPost,
 );
@@ -25,6 +29,8 @@ postRouter.put(
   "/:id",
   authMiddleware,
   ...postInputValidators,
+  postBlogIdInputValidator,
+  existingBlogIdBodyValidator,
   inputCheckErrorsMiddleware,
   updatePost,
 );

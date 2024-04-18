@@ -36,6 +36,7 @@ blogRouter.post(
   "/:blogId/posts",
   authMiddleware,
   ...postInputValidators,
+  existingBlogIdParamValidator,
   inputCheckErrorsMiddleware,
   createBlogPost,
 );

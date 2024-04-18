@@ -52,7 +52,7 @@ export const inputCheckErrorsMiddleware = (
   const e = validationResult(req);
   const errors = e.array({ onlyFirstError: true });
 
-  if (errors.filter((error) => error.msg === "blog not found")) {
+  if (errors.filter((error) => error.msg === "blog not found").length) {
     res.sendStatus(404);
     return;
   }

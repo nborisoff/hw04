@@ -55,7 +55,7 @@ describe("/blog", () => {
     };
 
     await req
-        .post(`${SETTINGS.PATH.BLOGS}/66200762c2382275f3152521/posts`)
+        .post(`${SETTINGS.PATH.BLOGS}/66200762c2382275f3152520/posts`)
         .set({ Authorization: "Basic " + codedAuth })
         .send(newPost)
         .expect(201);

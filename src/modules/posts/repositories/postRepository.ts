@@ -6,15 +6,15 @@ import { blogMongoQueryRepository } from "../../blogs/repositories/blogMongoQuer
 export const postRepository = {
   async create(input: PostInputType) {
     const blogId = new ObjectId(input.blogId);
-    const blogName = await blogMongoQueryRepository.find(blogId);
-    if (!blogName) {
+    const blog = await blogMongoQueryRepository.find(blogId);
+    if (!blog) {
       return { error: "Invalid blogId" };
     }
 
     const newPost = {
       ...input,
       blogId,
-      blogName: blogName.name,
+      blogName: blog.name,
       createdAt: new Date().toISOString(),
       _id: new ObjectId(),
     };

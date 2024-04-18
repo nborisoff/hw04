@@ -38,7 +38,7 @@ const postContentInputValidator = body("content")
   .withMessage("field is empty")
   .isLength({ max: 1000 })
   .withMessage("length limit exceeded");
-const postBlogIdInputValidator = body("blogId")
+export const postBlogIdInputValidator = body("blogId")
   .exists()
   .withMessage("field not exist")
   .isString()
@@ -67,8 +67,6 @@ export const postInputValidators = [
   postTitleInputValidator,
   postShortDescriptionInputValidator,
   postContentInputValidator,
-  postBlogIdInputValidator,
-  existingBlogIdBodyValidator,
 ];
 
 export const inputCheckErrorsMiddleware = (
@@ -79,7 +77,7 @@ export const inputCheckErrorsMiddleware = (
   const e = validationResult(req);
   const errors = e.array({ onlyFirstError: true });
 
-  if (errors.filter((error) => error.msg === "blog not found")) {
+  if (errors.filter((error) => error.msg === "blog not found").length) {
     res.sendStatus(404);
     return;
   }
