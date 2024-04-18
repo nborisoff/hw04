@@ -11,7 +11,10 @@ import { updateBlog } from "../controllers/updateBlogController";
 import { deleteBlog } from "../controllers/deleteBlogController";
 import { getBlogPosts } from "../controllers/getBlogPostsController";
 import { createBlogPost } from "../controllers/createBlogPostController";
-import { blogPostInputValidators } from "../../posts/middleware/middlewares";
+import {
+  existingBlogIdParamValidator,
+  postInputValidators,
+} from "../../posts/middleware/middlewares";
 
 export const blogRouter = Router();
 
@@ -23,11 +26,16 @@ blogRouter.post(
   inputCheckErrorsMiddleware,
   createBlog,
 );
-blogRouter.get("/:blogId/posts", getBlogPosts);
+blogRouter.get(
+  "/:blogId/posts",
+  existingBlogIdParamValidator,
+  inputCheckErrorsMiddleware,
+  getBlogPosts,
+);
 blogRouter.post(
   "/:blogId/posts",
   authMiddleware,
-  ...blogPostInputValidators,
+  ...postInputValidators,
   inputCheckErrorsMiddleware,
   createBlogPost,
 );

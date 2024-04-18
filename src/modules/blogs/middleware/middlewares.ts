@@ -4,7 +4,6 @@ import {
   FieldValidationError,
   validationResult,
 } from "express-validator";
-import { blogMongoQueryRepository } from "../repositories/blogMongoQueryRepository";
 
 const blogNameInputValidator = body("name")
   .exists()
@@ -45,16 +44,6 @@ export const blogInputValidators = [
   blogUrlInputValidator,
 ];
 
-export const blogUpdateValidator = body("blogId").custom(
-  async (blogId, { req }) => {
-    const blog = await blogMongoQueryRepository.find(blogId);
-    if (!blog) {
-      new Error("no blog!");
-    }
-    return blog;
-  },
-);
-
 export const inputCheckErrorsMiddleware = (
   req: Request,
   res: Response,
@@ -62,6 +51,11 @@ export const inputCheckErrorsMiddleware = (
 ) => {
   const e = validationResult(req);
   const errors = e.array({ onlyFirstError: true });
+
+  if (errors.filter((error) => error.msg === "blog not found")) {
+    res.sendStatus(404);
+    return;
+  }
 
   if (errors.length) {
     res.status(400).json({

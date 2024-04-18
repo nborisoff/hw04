@@ -51,7 +51,7 @@ export const blogIdCheckCallback = async (blogId: string) => {
   const blog = await blogMongoQueryRepository.find(new ObjectId(blogId));
 
   if (!blog) {
-    return Promise.reject("blog not found");
+    throw new Error("blog not found");
   }
 };
 
@@ -71,13 +71,6 @@ export const postInputValidators = [
   existingBlogIdBodyValidator,
 ];
 
-export const blogPostInputValidators = [
-  postTitleInputValidator,
-  postShortDescriptionInputValidator,
-  postContentInputValidator,
-  existingBlogIdParamValidator,
-];
-
 export const inputCheckErrorsMiddleware = (
   req: Request,
   res: Response,
@@ -85,6 +78,11 @@ export const inputCheckErrorsMiddleware = (
 ) => {
   const e = validationResult(req);
   const errors = e.array({ onlyFirstError: true });
+
+  if (errors.filter((error) => error.msg === "blog not found")) {
+    res.sendStatus(404);
+    return;
+  }
 
   if (errors.length) {
     res.status(400).json({
