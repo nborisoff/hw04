@@ -30,7 +30,7 @@ describe("/blog", () => {
   });
 
   it("get blog posts", async () => {
-    await req.get(`${SETTINGS.PATH.BLOGS}/66200762c2382275f3153333/posts`).expect(200);
+    await req.get(`${SETTINGS.PATH.BLOGS}/66217f130d773a74f22381e7/posts`).expect(200);
   });
 
   it("should create blog", async () => {

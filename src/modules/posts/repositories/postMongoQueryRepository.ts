@@ -8,19 +8,25 @@ export const postMongoQueryRepository = {
     const search = query.searchNameTerm
       ? { title: { $regex: query.searchNameTerm, $options: "i" } }
       : {};
+    const { sortBy, sortDirection, pageNumber, pageSize } = query;
 
     try {
-      const items = await postCollection.find({ ...byId, ...search }).toArray();
-      const documentsCount = await postCollection.countDocuments({
+      const items = await postCollection
+        .find({ ...byId, ...search })
+        .sort(sortBy, sortDirection)
+        .skip((pageNumber - 1) * pageSize)
+        .limit(pageSize)
+        .toArray();
+      const totalCount = await postCollection.countDocuments({
         ...byId,
         ...search,
       });
 
       return {
-        pagesCount: Math.ceil(documentsCount / query.pageSize),
-        page: query.pageNumber,
-        pageSize: query.pageSize,
-        totalCount: documentsCount,
+        pagesCount: Math.ceil(totalCount / pageSize),
+        page: pageNumber,
+        pageSize,
+        totalCount,
         items: items.map(this.mapToOutput),
       };
     } catch (e) {

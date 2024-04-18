@@ -16,12 +16,8 @@ describe("/post", () => {
   const buff2 = Buffer.from(ADMIN_AUTH, "utf8");
   const codedAuth = buff2.toString("base64");
 
-  it("should get empty array", async () => {
-    const res = await req.get(SETTINGS.PATH.POSTS).expect(200);
-
-    // console.log(res.body)
-
-    // expect(res.body.length).toBe(0)
+  it("should get posts", async () => {
+    await req.get(SETTINGS.PATH.POSTS).expect(200);
   });
 
   it("should create post", async () => {

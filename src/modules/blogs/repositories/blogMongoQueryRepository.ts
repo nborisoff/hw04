@@ -8,15 +8,21 @@ export const blogMongoQueryRepository = {
     const search = query.searchNameTerm
       ? { name: { $regex: query.searchNameTerm, $options: "i" } }
       : {};
+    const { sortBy, sortDirection, pageNumber, pageSize } = query;
 
     try {
-      const items = await blogCollection.find({ ...search }).toArray();
+      const items = await blogCollection
+        .find({ ...search })
+        .sort(sortBy, sortDirection)
+        .skip((pageNumber - 1) * pageSize)
+        .limit(pageSize)
+        .toArray();
       const documentsCount = await blogCollection.countDocuments({ ...search });
 
       return {
-        pagesCount: Math.ceil(documentsCount / query.pageSize),
-        page: query.pageNumber,
-        pageSize: query.pageSize,
+        pagesCount: Math.ceil(documentsCount / pageSize),
+        page: pageNumber,
+        pageSize,
         totalCount: documentsCount,
         items: items.map(this.mapToOutput),
       };

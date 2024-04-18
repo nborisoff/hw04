@@ -9,6 +9,6 @@ export const getBlogPosts = async (req: any, res: Response) => {
     sanitizedQuery,
     req.params.blogId,
   );
-  console.log(posts);
+
   res.status(HTTP_STATUSES.OK_200).json(posts);
 };
