@@ -7,7 +7,6 @@ import {
 } from "express-validator";
 import { ObjectId } from "mongodb";
 import { blogMongoQueryRepository } from "../../blogs/repositories/blogMongoQueryRepository";
-import { HTTP_STATUSES } from "../../../app/settings";
 
 const postTitleInputValidator = body("title")
   .exists()
@@ -88,21 +87,11 @@ export const inputCheckErrorsMiddleware = (
   const errors = e.array({ onlyFirstError: true });
 
   if (errors.length) {
-    let invalidBlog = false;
-    const errorsMessages = errors.map((error) => {
-      const { path } = error as FieldValidationError;
-      if (path === "blogId") invalidBlog = true;
-
-      return { message: `${path} error`, field: path };
-    });
-
-    if (invalidBlog) {
-      res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
-      return;
-    }
-
     res.status(400).json({
-      errorsMessages,
+      errorsMessages: errors.map((error) => {
+        const { msg, path } = error as FieldValidationError;
+        return { message: `${path} error`, field: path };
+      }),
     });
     return;
   }
