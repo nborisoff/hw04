@@ -5,7 +5,7 @@ import {
   validationResult,
 } from "express-validator";
 
-const userLoginInputValidator = body("name")
+const userLoginInputValidator = body("login")
   .exists()
   .withMessage("field not exist")
   .isString()
@@ -17,7 +17,7 @@ const userLoginInputValidator = body("name")
   .withMessage("length limit exceeded")
   .matches(/^[a-zA-Z0-9_-]*$/)
   .withMessage("wrong pattern");
-const userPasswordInputValidator = body("name")
+const userPasswordInputValidator = body("password")
   .exists()
   .withMessage("field not exist")
   .isString()
@@ -27,7 +27,7 @@ const userPasswordInputValidator = body("name")
   .withMessage("field is empty")
   .isLength({ min: 6, max: 20 })
   .withMessage("length limit exceeded");
-const userEmailInputValidator = body("name")
+const userEmailInputValidator = body("email")
   .exists()
   .withMessage("field not exist")
   .isString()
