@@ -2,6 +2,7 @@ import { Collection, Db, MongoClient } from "mongodb";
 import { SETTINGS } from "../app/settings";
 import { BlogDBType } from "../modules/blogs/models/blogs";
 import { PostDBType } from "../modules/posts/models/posts";
+import { UserDBType } from "../modules/user/models/users";
 
 // получение доступа к бд
 const client: MongoClient = new MongoClient(SETTINGS.MONGO_URL);
@@ -13,6 +14,9 @@ export const blogCollection: Collection<BlogDBType> = db.collection<BlogDBType>(
 );
 export const postCollection: Collection<PostDBType> = db.collection<PostDBType>(
   SETTINGS.POST_COLLECTION_NAME,
+);
+export const userCollection: Collection<UserDBType> = db.collection<UserDBType>(
+  SETTINGS.USER_COLLECTION_NAME,
 );
 
 // проверка подключения к бд

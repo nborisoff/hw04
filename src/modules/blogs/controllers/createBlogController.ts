@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { blogService } from "../service/blogService";
 import { blogMongoQueryRepository } from "../repositories/blogMongoQueryRepository";
+import { HTTP_STATUSES } from "../../../app/settings";
 
 export const createBlog = async (req: Request, res: Response) => {
   const createdBlog = await blogService.createBlog(req.body);
@@ -12,5 +13,5 @@ export const createBlog = async (req: Request, res: Response) => {
 
   const newBlog = await blogMongoQueryRepository.findForOutput(createdBlog.id);
 
-  res.status(201).json(newBlog);
+  res.status(HTTP_STATUSES.CREATED_201).json(newBlog);
 };

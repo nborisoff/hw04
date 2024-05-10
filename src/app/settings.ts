@@ -6,12 +6,14 @@ export const SETTINGS = {
   PATH: {
     POSTS: "/posts",
     BLOGS: "/blogs",
+    USERS: "/users",
     TESTING: "/testing",
   },
   MONGO_URL: process.env.MONGO_URL || "mongodb://localhost:27017",
   DB_NAME: process.env.DB_NAME || "local",
   BLOG_COLLECTION_NAME: process.env.BLOG_COLLECTION_NAME || "blog",
   POST_COLLECTION_NAME: process.env.POST_COLLECTION_NAME || "post",
+  USER_COLLECTION_NAME: process.env.USER_COLLECTION_NAME || "user",
 };
 
 export const HTTP_STATUSES = {

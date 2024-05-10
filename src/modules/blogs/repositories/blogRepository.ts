@@ -27,17 +27,5 @@ export const blogRepository = {
     const result = await blogCollection.deleteOne({ _id: id });
 
     return Boolean(result.deletedCount);
-  },
-  mapToOutput(blog: WithId<BlogDBType>) {
-    const { _id, name, description, websiteUrl, isMembership, createdAt } =
-      blog;
-    return {
-      id: _id,
-      name,
-      description,
-      websiteUrl,
-      isMembership,
-      createdAt,
-    };
-  },
+  }
 };
