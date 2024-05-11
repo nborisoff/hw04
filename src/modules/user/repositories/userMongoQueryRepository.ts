@@ -5,13 +5,17 @@ import { BlogDBType } from "../../blogs/models/blogs";
 
 export const userMongoQueryRepository = {
   async getMany(query: any) {
-    const { sortBy, sortDirection, pageNumber, pageSize } = query;
-    const search: { login?: any; email?: any } = {};
+    const { sortBy, sortDirection, pageNumber, pageSize, searchLoginTerm, searchEmailTerm } = query;
+    const search: any = searchLoginTerm || searchEmailTerm ? { $or: [] } : {};
 
-    if (query.searchLoginTerm)
-      search.login = { $regex: query.searchLoginTerm, $options: "i" };
-    if (query.searchEmailTerm)
-      search.email = { $regex: query.searchEmailTerm, $options: "i" };
+    if (searchLoginTerm)
+      search.$or.push({
+        login: { $regex: query.searchLoginTerm, $options: "i" },
+      });
+    if (searchEmailTerm)
+      search.$or.push({
+        email: { $regex: query.searchEmailTerm, $options: "i" },
+      });
 
     try {
       const items = await userCollection
