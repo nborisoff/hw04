@@ -5,13 +5,9 @@ import { bcryptService } from "../service/bcrypt.service";
 
 export const userRepository = {
   async create(input: UserInputType) {
-    const { password, passHash } = await bcryptService.generateHash(
-      input.password,
-    );
     const newUser = {
       ...input,
-      password,
-      passHash,
+      password: await bcryptService.generateHash(input.password),
       createdAt: new Date().toISOString(),
     };
 

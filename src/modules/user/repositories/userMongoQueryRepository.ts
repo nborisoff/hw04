@@ -44,6 +44,9 @@ export const userMongoQueryRepository = {
     }
     return this.mapToOutput(user);
   },
+  async findByLogin(login: string) {
+    return await userCollection.findOne({ login });
+  },
   mapToOutput(user: WithId<UserDBType>) {
     const { _id, login, email, createdAt } = user;
     return {
