@@ -15,7 +15,7 @@ export const authLogin = async (
   );
 
   if (!foundUser) {
-    res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
+    res.sendStatus(401);
     return;
   }
 
