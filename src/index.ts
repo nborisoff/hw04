@@ -6,6 +6,7 @@ import { blogRouter } from "./modules/blogs/routes/routes";
 import { postRouter } from "./modules/posts/routes/routes";
 import { testingRouter } from "./testing/routes";
 import { userRouter } from "./modules/user/routes/routes";
+import { authRouter } from "./modules/auth/routes/routes";
 
 const app = express();
 
@@ -27,6 +28,7 @@ const start = async () => {
   app.use(SETTINGS.PATH.BLOGS, blogRouter);
   app.use(SETTINGS.PATH.POSTS, postRouter);
   app.use(SETTINGS.PATH.USERS, userRouter);
+  app.use(SETTINGS.PATH.AUTH, authRouter);
   app.use(SETTINGS.PATH.TESTING, testingRouter);
 
   app.listen(SETTINGS.PORT, () => {
