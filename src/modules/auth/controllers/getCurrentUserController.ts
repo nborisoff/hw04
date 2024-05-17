@@ -3,9 +3,9 @@ import { HTTP_STATUSES } from "../../../app/settings";
 import { jwtService } from "../../../common/services/jwt.service";
 
 export const getCurrentUser = async (req: Request, res: Response) => {
-  // if (!req.headers.authorization || !req.headers.authorization.includes('Bearer')) {
-  //   res.sendStatus(HTTP_STATUSES.UNAUTHORIZED_401);
-  // }
+  if (!req.headers.authorization || !req.headers.authorization.includes('Bearer')) {
+    res.sendStatus(HTTP_STATUSES.UNAUTHORIZED_401);
+  }
 
   const token = req.headers.authorization!.split(" ")?.[1];
   const tokenData: any = await jwtService.getUserData(token);
