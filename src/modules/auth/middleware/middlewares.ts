@@ -1,5 +1,7 @@
 import {body, FieldValidationError, validationResult} from "express-validator";
 import {NextFunction, Request, Response} from "express";
+import {HTTP_STATUSES} from "../../../app/settings";
+import {jwtService} from "../../../common/services/jwt.service";
 
 const userLoginInputValidator = body("loginOrEmail")
   .exists()
@@ -43,3 +45,19 @@ export const inputCheckErrorsMiddleware = (
   }
   next();
 };
+
+export const jwtAuthMiddleware = async (req: Request, res: Response, next: NextFunction) => {
+  // if (!req.headers.authorization || !req.headers.authorization.includes('Bearer')) {
+  //   res.sendStatus(HTTP_STATUSES.UNAUTHORIZED_401);
+  // }
+  //
+  // const token = req.headers.authorization!.split(' ')?.[1]
+  // const userId = await jwtService.getUserId(token);
+  //
+  // if (userId) {
+  //   req.userId = userId
+  //   next();
+  // }
+  //
+  // res.sendStatus(HTTP_STATUSES.UNAUTHORIZED_401);
+}

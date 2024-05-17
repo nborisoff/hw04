@@ -3,7 +3,9 @@ import { authLogin } from "../controllers/authLoginController";
 import {
   authInputValidators,
   inputCheckErrorsMiddleware,
+  jwtAuthMiddleware,
 } from "../middleware/middlewares";
+import { getCurrentUser } from "../controllers/getCurrentUserController";
 
 export const authRouter = Router();
 
@@ -13,3 +15,4 @@ authRouter.post(
   inputCheckErrorsMiddleware,
   authLogin,
 );
+authRouter.get("/me", getCurrentUser);

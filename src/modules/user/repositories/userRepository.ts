@@ -1,18 +1,12 @@
 import { userCollection } from "../../../db/mongo-db";
 import { ObjectId } from "mongodb";
-import { UserInputType } from "../models/users";
-import { bcryptService } from "../service/bcrypt.service";
+import { UserDBType, UserInputType } from "../models/users";
+import { bcryptService } from "../../../common/services/bcrypt.service";
 
 export const userRepository = {
-  async create(input: UserInputType) {
-    const newUser = {
-      ...input,
-      password: await bcryptService.generateHash(input.password),
-      createdAt: new Date().toISOString(),
-    };
-
+  async create(user: UserDBType) {
     try {
-      const insertedInfo = await userCollection.insertOne(newUser);
+      const insertedInfo = await userCollection.insertOne(user);
       return { id: insertedInfo.insertedId };
     } catch (e) {
       console.log(e);
