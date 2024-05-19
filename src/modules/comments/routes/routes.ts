@@ -1,21 +1,22 @@
 import { Router } from "express";
 import { findComment } from "../controllers/findCommentController";
-import { updateBlog } from "../../blogs/controllers/updateBlogController";
-import { deleteBlog } from "../../blogs/controllers/deleteBlogController";
+
 import {
   authMiddleware,
   commentsInputValidators,
   inputCheckErrorsMiddleware,
 } from "../middleware/middlewares";
+import { updateComment } from "../controllers/updateCommentController";
+import { deleteComment } from "../controllers/deleteCommentController";
 
-export const blogRouter = Router();
+export const commentsRouter = Router();
 
-blogRouter.get("/:id", findComment);
-blogRouter.put(
+commentsRouter.get("/:id", findComment);
+commentsRouter.put(
   "/:id",
   authMiddleware,
   commentsInputValidators,
   inputCheckErrorsMiddleware,
-  updateBlog,
+  updateComment,
 );
-blogRouter.delete("/:id", authMiddleware, deleteBlog);
+commentsRouter.delete("/:id", authMiddleware, deleteComment);

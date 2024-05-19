@@ -7,9 +7,9 @@ import { ADMIN_AUTH } from "../src/modules/blogs/middleware/middlewares";
 describe("/blog", () => {
   beforeAll(async () => {
     await connectToDB();
-    // await req
-    //   .delete(`${SETTINGS.PATH.TESTING}/all-data`)
-    //   .expect(204);
+    await req
+      .delete(`${SETTINGS.PATH.TESTING}/all-data`)
+      .expect(204);
   });
 
   const buff2 = Buffer.from(ADMIN_AUTH, "utf8");
@@ -21,8 +21,7 @@ describe("/blog", () => {
       .set({ Authorization: "Basic " + codedAuth })
       .expect(200);
 
-    // console.log(res.body)
-    // expect(res.body.length).toBe(0)
+    console.log(res.body)
   });
 
   it("should get empty array", async () => {
