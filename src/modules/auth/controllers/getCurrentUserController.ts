@@ -13,6 +13,7 @@ export const getCurrentUser = async (req: Request, res: Response) => {
   if (tokenData.userId) {
     const { userId, login, email } = tokenData;
     res.status(HTTP_STATUSES.OK_200).send({ userId, login, email });
+    return;
   }
 
   res.sendStatus(HTTP_STATUSES.UNAUTHORIZED_401);
