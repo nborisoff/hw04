@@ -9,7 +9,7 @@ export const updateBlog = async (
   req: Request,
   res: Response,
 ) => {
-  let foundBlog = await blogMongoQueryRepository.find(
+  const foundBlog = await blogMongoQueryRepository.find(
     new ObjectId(req.params.id),
   );
 
@@ -18,7 +18,7 @@ export const updateBlog = async (
     return;
   }
 
-  let updatedBlog = await blogRepository.update(foundBlog._id, req.body);
+  const updatedBlog = await blogRepository.update(foundBlog._id, req.body);
 
   if (!updatedBlog) {
     res.sendStatus(HTTP_STATUSES.BAD_REQUEST_400);

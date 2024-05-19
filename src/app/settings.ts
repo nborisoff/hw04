@@ -15,6 +15,7 @@ export const SETTINGS = {
   BLOG_COLLECTION_NAME: process.env.BLOG_COLLECTION_NAME || "blog",
   POST_COLLECTION_NAME: process.env.POST_COLLECTION_NAME || "post",
   USER_COLLECTION_NAME: process.env.USER_COLLECTION_NAME || "user",
+  COMMENTS_COLLECTION_NAME: process.env.COMMENTS_COLLECTION_NAME || "comments",
   SECRET_KEY: process.env.SECRET_KEY || "JWT_SECRET"
 };
 
