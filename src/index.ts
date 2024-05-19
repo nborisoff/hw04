@@ -34,7 +34,7 @@ const start = async () => {
   app.use(SETTINGS.PATH.TESTING, testingRouter);
 
   app.listen(SETTINGS.PORT, () => {
-    console.log(`App listening on port ${SETTINGS.PORT}`);
+    // console.log(`App listening on port ${SETTINGS.PORT}`);
   });
 };
 start();
