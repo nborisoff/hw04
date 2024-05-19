@@ -4,6 +4,7 @@ import { blogMongoQueryRepository } from "../repositories/blogMongoQueryReposito
 import { HTTP_STATUSES } from "../../../app/settings";
 
 export const createBlog = async (req: Request, res: Response) => {
+  console.log(1)
   const createdBlog = await blogService.createBlog(req.body);
 
   if (!createdBlog.id) {

@@ -24,7 +24,6 @@ blogRouter.post(
   authMiddleware,
   ...blogInputValidators,
   inputCheckErrorsMiddleware,
-    (req, res, next,) => {},
   createBlog,
 );
 blogRouter.get(
