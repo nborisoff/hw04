@@ -5,26 +5,26 @@ export type RequestWithQuery<T> = Request<{}, {}, {}, T>;
 export type RequestWithParams<T> = Request<T>;
 export type RequestWithParamsAndBody<T, B> = Request<T, {}, B>;
 
-export interface RequestBody<B>  {
-  body: B
+export interface RequestBody<B> {
+  body: B;
 }
 
 export interface RequestParams<P> extends Express.Request {
-  params: P
+  params: P;
 }
 
 export interface RequestParamsBody<P, B> extends Express.Request {
-  params: P
-  body: B
+  params: P;
+  body: B;
 }
 
 export interface RequestQuery<Q> extends Express.Request {
-  query: Q
+  query: Q;
 }
 
 export interface RequestParamsQuery<P, Q> extends Express.Request {
-  params: P
-  query: Q
+  params: P;
+  query: Q;
 }
 
 export type Pagination = {

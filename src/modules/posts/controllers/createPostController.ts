@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import { postRepository } from "../repositories/postRepository";
 import { postMongoQueryRepository } from "../repositories/postMongoQueryRepository";
+import {postsService} from "../service/posts.service";
 
 export const createPost = async (req: Request, res: Response) => {
-  const createdPost = await postRepository.create(req.body);
+  const createdPost = await postsService.createPost(req.body);
 
   if (createdPost.error) {
     res.status(400).json(createdPost.error);

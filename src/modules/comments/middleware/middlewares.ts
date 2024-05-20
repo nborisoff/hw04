@@ -1,7 +1,7 @@
 import {NextFunction, Request, Response} from "express";
 import {body, FieldValidationError, validationResult} from "express-validator";
 
-const blogNameInputValidator = body("content")
+const contentInputValidator = body("content")
     .exists()
     .withMessage("field not exist")
     .isString()
@@ -13,7 +13,7 @@ const blogNameInputValidator = body("content")
     .withMessage("length limit exceeded");
 
 export const commentsInputValidators = [
-    blogNameInputValidator
+    contentInputValidator
 ];
 
 export const inputCheckErrorsMiddleware = (

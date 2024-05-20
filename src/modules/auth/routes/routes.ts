@@ -5,6 +5,7 @@ import {
   inputCheckErrorsMiddleware,
 } from "../middleware/middlewares";
 import { getCurrentUser } from "../controllers/getCurrentUserController";
+import { jwtAuthMiddleware } from "../../../common/middlewares/auth.middleware";
 
 export const authRouter = Router();
 
@@ -14,4 +15,9 @@ authRouter.post(
   inputCheckErrorsMiddleware,
   authLogin,
 );
-authRouter.get("/me", getCurrentUser);
+authRouter.get(
+  "/me",
+  jwtAuthMiddleware,
+  inputCheckErrorsMiddleware,
+  getCurrentUser,
+);

@@ -3,6 +3,7 @@ import { ObjectId } from "mongodb";
 export type CommentsDBType = {
   content: string;
   commentatorInfo: CommentatorInfoType;
+  postId: ObjectId;
   createdAt: string;
 };
 
@@ -11,4 +12,6 @@ type CommentatorInfoType = {
   userLogin: string;
 };
 
-export type CommentsInputType = Pick<CommentsDBType, "content">;
+export type CommentsInputType = Pick<CommentsDBType, "content" | "postId"> & {
+  userId: string;
+};

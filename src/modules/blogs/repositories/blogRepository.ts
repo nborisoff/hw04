@@ -1,6 +1,6 @@
 import { BlogInputType } from "../models/blogs";
 import { blogCollection } from "../../../db/mongo-db";
-import { ObjectId, WithId } from "mongodb";
+import { ObjectId } from "mongodb";
 
 export const blogRepository = {
   async create(input: BlogInputType) {

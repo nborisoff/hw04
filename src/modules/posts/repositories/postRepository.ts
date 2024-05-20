@@ -7,6 +7,7 @@ export const postRepository = {
   async create(input: PostInputType) {
     const blogId = new ObjectId(input.blogId);
     const blog = await blogMongoQueryRepository.find(blogId);
+
     if (!blog) {
       return { error: "Invalid blogId" };
     }

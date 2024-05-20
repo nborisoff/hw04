@@ -7,7 +7,7 @@ export const createUser = async (req: Request, res: Response) => {
   const createdUser = await userService.createUser(req.body);
 
   if (!createdUser.id) {
-    res.status(500).json({});
+    res.sendStatus(500);
     return;
   }
 

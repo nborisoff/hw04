@@ -27,7 +27,7 @@ export const commentsCollection: Collection<CommentsDBType> =
 export const connectToDB = async () => {
   try {
     await client.connect();
-    console.log("connected to db");
+    // console.log("connected to db");
     return true;
   } catch (e) {
     console.log(e);
