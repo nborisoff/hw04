@@ -5,9 +5,7 @@ import { postCollection } from "../../../db/mongo-db";
 export const postMongoQueryRepository = {
   async getMany(query: any, blogId?: string) {
     const byId = blogId ? { blogId: new ObjectId(blogId) } : {};
-    const search = query.searchNameTerm
-      ? { title: { $regex: query.searchNameTerm, $options: "i" } }
-      : {};
+    const search = {};
     const { sortBy, sortDirection, pageNumber, pageSize } = query;
 
     try {

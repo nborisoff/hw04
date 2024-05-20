@@ -17,6 +17,7 @@ export const commentsRepository = {
 
     const newComment = {
       ...input,
+      postId,
       commentatorInfo: {
         userId,
         userLogin: user!.login,

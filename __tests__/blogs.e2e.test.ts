@@ -44,6 +44,13 @@ describe("/blog", () => {
       .expect(201);
   });
 
+  it("should get blog posts", async () => {
+    const res =  await req
+        .get(`${SETTINGS.PATH.BLOGS}/664b8a3f743c6054f6aec5d1/posts`)
+        .expect(200);
+    console.log(res.body)
+  });
+
   it("should create blog post", async () => {
     const newPost = {
       title: "ttl",

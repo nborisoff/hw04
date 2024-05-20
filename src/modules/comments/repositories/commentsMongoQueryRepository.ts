@@ -4,10 +4,8 @@ import { CommentsDBType } from "../models/comments";
 
 export const commentMongoQueryRepository = {
   async getMany(query: any, postId?: string) {
-    const byId = postId ? { blogId: new ObjectId(postId) } : {};
-    const search = query.searchNameTerm
-      ? { title: { $regex: query.searchNameTerm, $options: "i" } }
-      : {};
+    const byId = postId ? { postId: new ObjectId(postId) } : {};
+    const search = {};
     const { sortBy, sortDirection, pageNumber, pageSize } = query;
 
     try {

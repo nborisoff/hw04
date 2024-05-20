@@ -26,6 +26,7 @@ export const jwtAuthMiddleware = async (
 
     await userMongoQueryRepository.find(new ObjectId(userId));
     req.userId = userId;
+
     next();
   } catch (err) {
     res.sendStatus(HTTP_STATUSES.UNAUTHORIZED_401);
