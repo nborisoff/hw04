@@ -1,6 +1,7 @@
 import { Response } from "express";
 import { postMongoQueryRepository } from "../repositories/postMongoQueryRepository";
 import { postsService } from "../service/posts.service";
+import { commentMongoQueryRepository } from "../../comments/repositories/commentsMongoQueryRepository";
 
 export const createPostComment = async (
   req: any,
@@ -23,7 +24,7 @@ export const createPostComment = async (
     return;
   }
 
-  const newComment = await postMongoQueryRepository.findForOutput(
+  const newComment = await commentMongoQueryRepository.findForOutput(
     createdComment.id,
   );
 
